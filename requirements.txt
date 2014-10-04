@@ -7,4 +7,4 @@ psycopg2
 wsgiref==0.1.2
 werkzeug
 reportlab
--e http://www.satchmoproject.com/snapshots/trml2pdf-1.2.tar.gz#egg=TRML2PDF-1.0
+-e http://pkgs.fedoraproject.org/repo/pkgs/python-trml2pdf/trml2pdf-1.2.tar.gz/d04ef352401b9b5f8f862d165edee012/trml2pdf-1.2.tar.gz#egg=TRML2PDF-1.0
