@@ -42,7 +42,7 @@ class Command(BaseCommand):
             fax.error = True
             fax.status = 2  # Error
             logging.info("Fax %s has an error; reason: %s", commid, msg)
-            
+
         fax.update_from_logfile()
         if fax.station_id == fax.caller_id or fax.station_id == '-':
             fax.station_id = None
