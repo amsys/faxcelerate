@@ -36,16 +36,13 @@ class Command(BaseCommand):
         # TODO improve caller_id
         fax.caller_id = str(callid)
 
-        try:
+        if os.path.isfile(filename):
             fax.update_from_tiff()
-        except ValueError, e:
-            if msg:
-                fax.error = True
-                fax.status = 2  # Error
-                logging.info("Fax %s has an error; reason: %s", commid, msg)
-            else:
-                raise e
-
+        else:
+            fax.error = True
+            fax.status = 2  # Error
+            logging.info("Fax %s has an error; reason: %s", commid, msg)
+            
         fax.update_from_logfile()
         if fax.station_id == fax.caller_id or fax.station_id == '-':
             fax.station_id = None
