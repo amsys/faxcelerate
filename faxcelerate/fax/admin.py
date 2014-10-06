@@ -21,10 +21,13 @@ __license__ 		= "GNU Affero GPL v. 3.0"
 __contact__			= "faxcelerate@corp.it"
 
 from django.contrib import admin
+from django.contrib.auth import admin as auth_admin
+
 from django.utils.translation import ugettext_lazy as _
 from faxcelerate.fax.models import *
 
 from django.core.exceptions import PermissionDenied
+
 
 class FaxAdmin(admin.ModelAdmin):
     #list_filter = ['outbound', 'received_on', 'expiry', 'sender', 'in_folders']
@@ -73,8 +76,10 @@ class FaxAdmin(admin.ModelAdmin):
             return HttpResponse('<script>window.opener.location.href = window.opener.location.href; window.close();</script>')
         return r
 
+
 class PhonebookAdmin(admin.ModelAdmin):
     list_display = ('subject', 'number')
+
 
 class FaxcelerateAdminSite(admin.AdminSite):
     def index(self, request, extra_context=None):
@@ -93,4 +98,4 @@ admin.site.register(SenderStationID)
 admin.site.register(FolderACL)
 admin.site.register(PhonebookEntry, PhonebookAdmin)
 
-from django.contrib.auth import admin
+
