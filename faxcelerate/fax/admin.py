@@ -14,14 +14,14 @@
 # License along with Faxcelerate.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-__author__			= "Emanuele Pucciarelli"
-__organization__	= "C.O.R.P. s.n.c"
-__copyright__		= "Copyright 2007-2012, C.O.R.P. s.n.c"
-__license__ 		= "GNU Affero GPL v. 3.0"
-__contact__			= "faxcelerate@corp.it"
+__author__ = "Emanuele Pucciarelli"
+__organization__ = "C.O.R.P. s.n.c"
+__copyright__ = "Copyright 2007-2012, C.O.R.P. s.n.c"
+__license__ = "GNU Affero GPL v. 3.0"
+__contact__ = "faxcelerate@corp.it"
 
 from django.contrib import admin
-import django.contrib.auth.admin
+from django.contrib.auth.admin import UserAdmin, GroupAdmin
 
 from django.utils.translation import ugettext_lazy as _
 from faxcelerate.fax.models import *
@@ -30,11 +30,11 @@ from django.core.exceptions import PermissionDenied
 
 
 class FaxAdmin(admin.ModelAdmin):
-    #list_filter = ['outbound', 'received_on', 'expiry', 'sender', 'in_folders']
-    list_filter = ['outbound', 'received_on',  'in_folders', 'status']
+    # list_filter = ['outbound', 'received_on', 'expiry', 'sender', 'in_folders']
+    list_filter = ['outbound', 'received_on', 'in_folders', 'status']
     list_display = ('short_id', 'device_friendly_name', 'inout', 'status',
-        'sender_field', 'sender_ident', 'received_on', 'folder_list',
-        'admin_notes', 'admin_thumbs')
+                    'sender_field', 'sender_ident', 'received_on', 'folder_list',
+                    'admin_notes', 'admin_thumbs')
     list_per_page = 10
     date_hierarchy = 'received_on'
     fieldsets = (
@@ -46,7 +46,7 @@ class FaxAdmin(admin.ModelAdmin):
         '/support/js/jquery.js',
         '/support/js/hovertip.js',
         '/support/js/init.js'
-        )
+    )
     save_on_top = True
     search_fields = ['station_id', 'caller_id', 'sender__label', 'notes']
 
@@ -69,11 +69,13 @@ class FaxAdmin(admin.ModelAdmin):
             raise PermissionDenied
         import django.contrib.admin.views.main
         from django.http import HttpResponse
+
         r = super(FaxAdmin, self).change_view(request, object_id, extra_content)
         if request.method == 'POST':
             Fax.objects.get(pk=object_id).fix_folders()
         if r.status_code == 302:
-            return HttpResponse('<script>window.opener.location.href = window.opener.location.href; window.close();</script>')
+            return HttpResponse(
+                '<script>window.opener.location.href = window.opener.location.href; window.close();</script>')
         return r
 
 
@@ -88,6 +90,7 @@ class FaxcelerateAdminSite(admin.AdminSite):
         extra_context.update({'title': _('Main dashboard')})
         return super(FaxcelerateAdminSite, self).index(request, extra_context)
 
+
 admin.site = FaxcelerateAdminSite()
 
 admin.site.register(Folder)
@@ -97,3 +100,6 @@ admin.site.register(SenderCID)
 admin.site.register(SenderStationID)
 admin.site.register(FolderACL)
 admin.site.register(PhonebookEntry, PhonebookAdmin)
+
+admin.site.register(User, UserAdmin)
+admin.site.register(Group, GroupAdmin)
