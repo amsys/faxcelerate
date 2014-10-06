@@ -446,7 +446,7 @@ class Fax(models.Model):
         if not self.station_id:
             self.station_id = th.im.tag[270]
 
-        self.time_to_receive = th.im.tag[34910]
+        self.time_to_receive, = th.im.tag[34910]
 
         i = 1
         try:
