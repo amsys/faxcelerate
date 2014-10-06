@@ -422,7 +422,8 @@ class Fax(models.Model):
                 if ancestor in folders:
                     self.in_folders.remove(ancestor)
                     
-    def available_printers(self):
+    @staticmethod
+    def available_printers():
         return settings.PRINTERS
         
     def update_from_tiff(self):

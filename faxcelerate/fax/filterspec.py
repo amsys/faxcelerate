@@ -30,6 +30,7 @@ import models
 
 from django.db import models as django_models
 
+
 class FolderFilterSpec(RelatedFilterSpec):
     def __init__(self, f, request, params, model, model_admin, **kwargs):
         super(FolderFilterSpec, self).__init__(f, request, params, model, model_admin, **kwargs)
@@ -53,7 +54,7 @@ class FolderFilterSpec(RelatedFilterSpec):
         m = [c for c in self.lookup_choices]
         def foldersort(x, y):
             if x == y.parent or x.__str__() < y.__str__():
-               return -1
+                return -1
             else:
                 return 1
         m.sort()
@@ -77,8 +78,9 @@ class FolderFilterSpec(RelatedFilterSpec):
             yield d
     
 
-FilterSpec.filter_specs.insert(0, 
-    (lambda f: hasattr(f, 'folder_nature'), FolderFilterSpec))
+FilterSpec.filter_specs.insert(
+    0, (lambda f: hasattr(f, 'folder_nature'), FolderFilterSpec))
+
 
 class ExpiryFilterSpec(DateFieldFilterSpec):
     def __init__(self, f, request, params, model, model_admin):
