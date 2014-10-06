@@ -21,8 +21,8 @@ class Command(BaseCommand):
         TIFF_OUTPUT_DIR = os.path.join(settings.FAX_SPOOL_DIR, 'senttiff')
 
         qfile, why, jobtime = args[:3]
-        nexttry = args.get(4, False)
-
+        nexttry, = args[3:]
+        
         # Scan qfile for info
         info = {}
         for line in open(os.path.join(settings.FAX_SPOOL_DIR, qfile), 'r'):
