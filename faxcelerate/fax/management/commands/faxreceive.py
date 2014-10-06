@@ -28,7 +28,7 @@ class Command(BaseCommand):
 
         fax = Fax()
         fax.received_on = datetime.fromtimestamp(os.path.getmtime(filename))
-        fax.filename = filename
+        fax.filename = qfile
         fax.device = devid
         fax.comm_id = commid
         fax.reason = msg
