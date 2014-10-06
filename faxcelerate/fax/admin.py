@@ -21,7 +21,6 @@ __license__ = "GNU Affero GPL v. 3.0"
 __contact__ = "faxcelerate@corp.it"
 
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin, GroupAdmin
 
 from django.utils.translation import ugettext_lazy as _
 from faxcelerate.fax.models import *
@@ -90,7 +89,6 @@ class FaxcelerateAdminSite(admin.AdminSite):
         extra_context.update({'title': _('Main dashboard')})
         return super(FaxcelerateAdminSite, self).index(request, extra_context)
 
-
 admin.site = FaxcelerateAdminSite()
 
 admin.site.register(Folder)
@@ -101,5 +99,4 @@ admin.site.register(SenderStationID)
 admin.site.register(FolderACL)
 admin.site.register(PhonebookEntry, PhonebookAdmin)
 
-admin.site.register(User, UserAdmin)
-admin.site.register(Group, GroupAdmin)
+import django.contrib.auth.admin
