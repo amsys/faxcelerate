@@ -21,7 +21,7 @@ __license__ 		= "GNU Affero GPL v. 3.0"
 __contact__			= "faxcelerate@corp.it"
 
 from django.contrib import admin
-from django.contrib.auth import admin as auth_admin
+import django.contrib.auth.admin
 
 from django.utils.translation import ugettext_lazy as _
 from faxcelerate.fax.models import *
@@ -97,5 +97,3 @@ admin.site.register(SenderCID)
 admin.site.register(SenderStationID)
 admin.site.register(FolderACL)
 admin.site.register(PhonebookEntry, PhonebookAdmin)
-
-

@@ -449,7 +449,7 @@ class Fax(models.Model):
                 self.station_id = th.im.tag.get(270, False)
 
             self.time_to_receive, = th.im.tag.get(34910, 1)
-            
+
         i = 1
         try:
             while th.seek(i):
