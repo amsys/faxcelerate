@@ -438,7 +438,7 @@ class Fax(models.Model):
         return settings.PRINTERS
 
     def update_from_tiff(self):
-        th = tiffany.open(self.filename, 'r')
+        th = tiffany.open(settings.FAX_SPOOL_DIR + '/' + self.filename, 'r')
 
         # TIFFTAG_IMAGEDESCRIPTION: 270
         # TIFFTAG_FAXRECVTIME: 34910
