@@ -440,14 +440,16 @@ class Fax(models.Model):
     def update_from_tiff(self):
         th = tiffany.open(settings.FAX_SPOOL_DIR + '/' + self.filename, 'r')
 
+        # TIFFTAG_SOFTWARE: 305
         # TIFFTAG_IMAGEDESCRIPTION: 270
         # TIFFTAG_FAXRECVTIME: 34910
+        if th.im.tag.get(305, '').startswith('HylaFAX'):
 
-        if not self.station_id:
-            self.station_id = th.im.tag[270]
+            if not self.station_id:
+                self.station_id = th.im.tag.get(270, False)
 
-        self.time_to_receive, = th.im.tag[34910]
-
+            self.time_to_receive, = th.im.tag.get(34910, 1)
+            
         i = 1
         try:
             while th.seek(i):
