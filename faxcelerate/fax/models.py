@@ -452,11 +452,13 @@ class Fax(models.Model):
 
         i = 1
         try:
-            while th.seek(i):
+            while i < 1024:
+                th.seek(i)
                 i += 1
         except EOFError:
-            self.pages = i
+            pass
 
+        self.pages = i
         del th
 
     def update_from_logfile(self):
