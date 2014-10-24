@@ -125,8 +125,8 @@ In this example we'll use the following paths:
 	incoming and outgoing fax message. In ``faxrcvd``, right after the 
 	syntax check, you can add::
 	
-		/var/local/faxcelerate-env/bin/python /var/local/faxcelerate-env/src/faxcelerate/faxcelerate/bin/faxrcvd.py "$@"
+		/var/local/faxcelerate-env/bin/python /var/local/faxcelerate-env/src/faxcelerate/faxcelerate/manage.py faxreceive "$@"
 
 	In ``notify`` you can add::
 	
-		/var/local/faxcelerate-env/bin/python /var/local/faxcelerate-env/src/faxcelerate/faxcelerate/bin/notify.py "$@"
+		/var/local/faxcelerate-env/bin/python /var/local/faxcelerate-env/src/faxcelerate/faxcelerate/manage.py faxnotify "$@"
